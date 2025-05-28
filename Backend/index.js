@@ -13,7 +13,12 @@ dotenv.config();
 // middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+  origin: process?.env?.FRONTEND_URL,
+  credentials: true,
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-type', 'Authorization']
+}));
 
 const PORT = process.env.PORT || 3001;
 const URI = process.env.MONGODB_URI;
